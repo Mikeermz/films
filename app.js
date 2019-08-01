@@ -36,7 +36,7 @@ app.post('/movie', (req, resp) => {
 
 //  All Movies
 app.get('/movies', (req, resp) => {
-  Movie.find().exec()
+  Movie.find({isActive: true}).exec()
       .then( ( movies ) => resp.status(200).send({movies}))
       .catch(( error ) => resp.status(409).send(error))
 });
@@ -72,11 +72,27 @@ app.patch('/movie/:id', (req, resp) => {
       .catch(( error ) => resp.status(409).send(error))
 });
 
+// Delete Logic Movie
+app.delete('/movie/:id', (req, resp) => {
+  const { id } = req.params;
+  Movie.findByIdAndUpdate(id, {$set: {isActive: false}}, {new: true}).exec()
+      .then( ( movie ) => movie 
+                          ? resp.status(200).send({movie}) 
+                          : resp.status(404).send({message: 'Not Found'}) )
+      .catch(( error ) => resp.status(409).send(error))
+});
+
+// Delete Forever
+app.delete('/movie/delete/:id', (req, resp) => {
+  const { id } = req.params;
+  Movie.findByIdAndDelete(id).exec()
+      .then( ( movie ) => movie 
+                          ? resp.status(200).send({movie}) 
+                          : resp.status(404).send({message: 'Not Found'}) )
+      .catch(( error ) => resp.status(409).send(error))
+});
 
 app.listen(PORT, () => {
   console.log(`Server on port ${PORT}`);
 });
 
-app.listen(3002, () => {
-  console.log(`Server on port ${PORT}`);
-});

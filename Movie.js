@@ -40,7 +40,11 @@ const MovieSchema = new Schema(
           required: true
         }
       }]
-    }
+    },
+    isActive: {
+      type: Boolean,
+      default: true
+    },
   }, 
   {timestamps: true}
 );
