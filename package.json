@@ -13,6 +13,10 @@
     "mongoose": "^5.6.7"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app/app.js",
+    "dev": "nodemon app/app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
