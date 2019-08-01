@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const URL_MONGO = 'mongodb+srv://mikeermz:0YDd63tZM0Mc21oC@mikee-wvjvk.mongodb.net/films';
+const mongoose = require('mongoose' );
+const URL_MONGO = process.env.URL_MONGO;
 
 mongoose.connect(URL_MONGO, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true },(err)=>{
   if (!err) {

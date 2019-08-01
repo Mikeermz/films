@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+dotenv.config();
 const { Movie } = require('./Movie');
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 // Call express
 
