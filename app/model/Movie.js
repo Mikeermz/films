@@ -1,11 +1,4 @@
 const mongoose = require('mongoose' );
-const URL_MONGO = process.env.URL_MONGO;
-
-mongoose.connect(URL_MONGO, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true },(err)=>{
-  if (!err) {
-    console.log('Conexión exitosa');
-  } 
-});
 
 const Schema = mongoose.Schema;
 
@@ -45,7 +38,7 @@ const MovieSchema = new Schema(
       type: Boolean,
       default: true
     },
-  }, 
+  },
   {timestamps: true}
 );
 

@@ -1,4 +1,5 @@
 const express = require('express');
+// Controllers
 const { homeController } = require('../controller/home');
 const {
   createMovie, getMovies, getMovieById,
@@ -6,6 +7,7 @@ const {
   deleteMovieForEver
 } = require('../controller/movie');
 
+// Init router
 const router = express.Router();
 
 // Home router
