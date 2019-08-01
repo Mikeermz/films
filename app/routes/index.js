@@ -1,20 +1,10 @@
 const express = require('express');
 const { Movie } = require('../model/Movie');
-
+const { homeController } = require('../controller/home');
 const router = express.Router();
 
-router.get('/', (req, resp) => {
-  const suma = 2 + 3
-  const { headers } = req;
-  const { host } = headers
-  if (host === 'localhost:3002') {
-    resp.send({
-      message: `Server on ${host}`,
-    });
-  } else {
-    resp.send({suma})
-  }
-});
+// Home router
+router.get('/', homeController);
 
 // Create Movie
 router.post('/movie', (req, resp) => {
