@@ -1,21 +1,14 @@
 const express = require('express');
 const { Movie } = require('../model/Movie');
 const { homeController } = require('../controller/home');
+const { createMovie } = require('../controller/movie');
 const router = express.Router();
 
 // Home router
 router.get('/', homeController);
 
 // Create Movie
-router.post('/movie', (req, resp) => {
-  // const { title, genre } = req.body
-
-  const newMovie = Movie(req.body );
-
-  newMovie.save((error, movie) => {
-    error ? resp.status(409).send(error) : resp.status(201).send(movie)
-  })
-})
+router.post('/movie', createMovie);
 
 //  All Movies
 router.get('/movies', (req, resp) => {
