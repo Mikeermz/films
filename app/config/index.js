@@ -8,11 +8,9 @@ const ENVS = {
     port: process.env.PORT
   },
   test: {
-
   },
   production: {
-
   }
-}
+};
 
 module.exports = ENVS[NODE_ENV];
