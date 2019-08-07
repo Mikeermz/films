@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const { SECRET_KEY } =require('../config');
 
-const { createUser } = require('./User');
+const { createUser, getUserByEmail } = require('./User');
 
 Date.prototype.addDays = function(days) {
   let date = new Date(this.valueOf());
@@ -35,7 +35,24 @@ const signup = (data) => {
   })
 }
 
-const login = ({}) => {
+const login = ({ email, password}) => {
+  return new Promise( (resolve, reject) => {
+    getUserByEmail(email)
+      .then( (user) => {
+        bcrypt.compare(
+          password,
+          user.password,
+          (error, isValid) =>{
+            if (error) {
+              reject(error);
+            }
+            isValid
+              ? resolve(createToken(user))
+              : reject('Password does not match')
+          })
+      })
+      .catch( (error) =>  reject(error));
+  })
 
 }
 

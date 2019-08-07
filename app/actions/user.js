@@ -5,7 +5,7 @@ const createUser = async (data) => {
 };
 
 const getUserByEmail = (email) => {
-	return User.findOne({email:email});
+	return User.findOne({email});
 };
 
 const getUserById = (id) => {

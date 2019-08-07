@@ -19,7 +19,7 @@ router.delete('/movie/delete/:id', movieController.removeMovie);
 router.post('/user', userController.createUser)
 // Authenticate
 router.post("/signup", authController.signUp);
-// router.post("/login", LogIn);
+router.post("/login", authController.login);
 
 
 module.exports = router;
