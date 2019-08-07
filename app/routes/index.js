@@ -1,37 +1,15 @@
+
 const express = require('express');
-// Controllers
-const { homeController } = require('../controller/home');
-const {
-  createMovie, getMovies, getMovieById,
-  getMovieByName, updateMovie, deleteLogicMovie,
-  deleteMovieForEver
-} = require('../controller/movie');
-
-// Init router
 const router = express.Router();
-
-// Home router
+const  {homeController} = require('../controller/home');
+const  movieController  = require('../controller/movie');
 router.get('/', homeController);
-
-// Create Movie
-router.post('/movie', createMovie);
-
-//  All Movies
-router.get('/movies', getMovies );
-
-// One Movie
-router.get('/movie/:id', getMovieById);
-
-// Search by name
-router.get('/search', getMovieByName);
-
-// Update Movie
-router.patch('/movie/:id', updateMovie);
-
-// Delete Logic Movie
-router.delete('/movie/:id', deleteLogicMovie);
-
-// Delete Forever
-router.delete('/movie/delete/:id', deleteMovieForEver);
+router.post('/movie', movieController.createMovie);
+router.get('/movies', movieController.getMovies);
+router.get('/movie/:id', movieController.getMovie);
+router.get('/search/', movieController.searchMovie);
+router.patch('/movie/:id', movieController.updateMovie);
+router.delete('/movie/:id', movieController.deleteMovie);
+router.delete('/movie/delete/:id', movieController.removeMovie);
 
 module.exports = router;
