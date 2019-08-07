@@ -11,12 +11,13 @@ Date.prototype.addDays = function(days) {
   return date;
 }
 
-const createToken = ({ firstName, lastName}) => {
+const createToken = ({ firstName, lastName, email}) => {
   const expiredToken = new Date().addDays(1).getTime();
 
   const payload = {
     firstName,
     lastName,
+    email,
     expiredToken
   }
   console.log(SECRET_KEY);

@@ -1,4 +1,4 @@
-const  User  = require("../models/Users");
+const  User  = require("../model/User");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 
@@ -13,10 +13,10 @@ const verifyToken = (token) => {
 
 	if (prefix != tokenPrefix) throw new Error("Invalid header format");
 
-	let payload = jwt.verify(recivedToken, SECRET_KEY);
+  let payload = jwt.verify(recivedToken, SECRET_KEY);
+  console.log(payload);
 
-	return User.findById(payload._id);
-
+  return User.find({email: payload.email});
 };
 
 

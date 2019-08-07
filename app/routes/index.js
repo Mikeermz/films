@@ -5,8 +5,14 @@ const  {homeController} = require('../controller/home');
 const  movieController  = require('../controller/movie');
 const  userController  = require('../controller/user');
 const  authController  = require('../controller/auth');
+const isAuthenticated = require('../middlewares/isAuthenticated');
+
+
 //  Home
-router.get('/', homeController);
+router.get('/', isAuthenticated, homeController);
+
+
+
 // Movi
 router.post('/movie', movieController.createMovie);
 router.get('/movies', movieController.getMovies);
