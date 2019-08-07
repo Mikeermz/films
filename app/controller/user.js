@@ -1,12 +1,7 @@
-const {
-  getAllUsers,
-  getUserById,
-  updateUserById,
-  deleteUserById
-} = require("../actions");
+const { User } = require("../actions");
 
 const getUsers = (req, res) => {
-	getAllUsers().then((users) => {
+	User.getAllUsers().then((users) => {
 		res.status(200).json(users);
 	}).catch((e) => {
 		res.status(400).json(e);
@@ -16,7 +11,7 @@ const getUsers = (req, res) => {
 
 const getUser = (req, res) => {
 
-	getUserById(req.params.id).then((user) => {
+	User.getUserById(req.params.id).then((user) => {
 		if (!user) res.status(404).json({ "message": "User does not exist" });
 		res.status(200).json(user);
 	}).catch((e) => {
@@ -26,7 +21,7 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-	updateUserById(req.params.id, req.body).then((user) => {
+	User.updateUserById(req.params.id, req.body).then((user) => {
 		if (!user) res.status(404).json({ "message": "User does not exist" });
 		res.status(200).json(user);
 	}).catch((e) => {
@@ -36,7 +31,7 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-	deleteUserById(req.params.id).then((user) => {
+	User.deleteUserById(req.params.id).then((user) => {
 		if (!user) res.status(404).json({ "message": "User does not exist" });
 		res.status(200).json({ "message": "User deleted seccessfully" });
 	}).catch((e) => {
@@ -50,7 +45,7 @@ const me = (req, res) => {
 };
 
 const updateMe = (req, res) => {
-	updateUserById(req.user._id, req.body).then((user) => {
+	User.updateUserById(req.user._id, req.body).then((user) => {
 		if (!user) res.status(404).json({ "message": "User does not exist" });
 		res.status(200).json(user);
 	}).catch((e) => {
@@ -59,6 +54,16 @@ const updateMe = (req, res) => {
 
 };
 
+const createUser = (req, res) => {
+  console.log(req.body);
+  const data = req.body
+  User.createUser(data).then((user) => {
+      res.status(201).json(user);
+  }).catch((error) =>{
+      console.log(error);
+      res.status(400).json(error)
+  });
+};
 
 module.exports = {
 	getUsers,
@@ -66,5 +71,6 @@ module.exports = {
 	updateUser,
 	deleteUser,
 	me,
-	updateMe
+  updateMe,
+  createUser,
 };
