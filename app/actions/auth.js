@@ -20,7 +20,7 @@ const createToken = ({ firstName, lastName, email}) => {
     email,
     expiredToken
   }
-  console.log(SECRET_KEY);
+
   return jwt.encode( payload, SECRET_KEY);
 }
 
@@ -29,7 +29,6 @@ const signup = (data) => {
     createUser(data)
       .then( (user) => {
         const token = createToken(user);
-        console.log(token);
         resolve(token);
       })
       .catch( (error) =>  reject(error));

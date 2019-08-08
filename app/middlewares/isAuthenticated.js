@@ -6,7 +6,7 @@ const { SECRET_KEY } = require("../config");
 const tokenPrefix = "JWT";
 
 
-const verifyToken = (token) => {
+const verifyToken = async(token) => {
 	if (!token) throw new Error("No token provided");
 	const [prefix, recivedToken] = token.split(" ");
 	if (!recivedToken) throw new Error("No Token Provided");
@@ -29,8 +29,8 @@ module.exports = async (req, res, next) => {
 		if (!user) return res.status(400).json({ "message": "Token is invalid" });
 
 		req.user = user;
+    res.send({user})
 
-		next();
 
 
 	} catch (e) {
