@@ -29,9 +29,7 @@ module.exports = async (req, res, next) => {
 		if (!user) return res.status(400).json({ "message": "Token is invalid" });
 
 		req.user = user;
-    res.send({user})
-
-
+    next();
 
 	} catch (e) {
 		let message = e.message;
